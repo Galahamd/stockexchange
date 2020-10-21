@@ -62,11 +62,12 @@ const routes = [
 ];
 
 let router = new VueRouter({
+  mode: "history",
   routes
 });
 //Nav Guards
 router.beforeEach((to, from, next) => {
-//Check for requiredAuth guard
+  //Check for requiredAuth guard
   if (to.matched.some(record => record.meta.requiresAuth)) {
     //Checks if NOT logged in
     if (!Firebase.auth().currentUser) {

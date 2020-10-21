@@ -1,27 +1,16 @@
 <template>
-  <nav>
+  <nav class="nav-extended">
     <div class="nav-wrapper red accent-4">
       <a href="/" class="left">
         <img src="@/assets/logo_loyola_u.png" alt="" />
       </a>
       <!-- Verificacion de Login -->
-      <ul class=" right">
+      <ul class="side-nav right">
         <li v-if="!isLoggedIn">
           <router-link to="/login">Iniciar Sesion</router-link>
         </li>
         <li v-if="!isLoggedIn">
           <router-link to="/register">Registrase</router-link>
-        </li>
-        <li v-if="isLoggedIn"><router-link to="/">Noticias</router-link></li>
-        <li v-if="isLoggedIn">
-          <router-link to="/broker">Broker</router-link>
-        </li>
-        <li v-if="isLoggedIn">
-          <router-link to="/stockexchange">Stock Exchange</router-link>
-        </li>
-
-        <li v-if="isLoggedIn">
-          <router-link to="/profile">Perfil</router-link>
         </li>
         <li v-if="isLoggedIn" v-on:click="logout">
           <button class="btn amber accent-4">
@@ -30,6 +19,21 @@
         </li>
       </ul>
       <!-- ------------------------------------------------------------------------ -->
+    </div>
+    <div v-if="isLoggedIn" class="nav-content red darken-4">
+      <ul class="tabs tabs-transparent">
+        <li><router-link to="/">Noticias</router-link></li>
+        <li>
+          <router-link to="/broker">Broker</router-link>
+        </li>
+        <li>
+          <router-link to="/stockexchange">Stock Exchange</router-link>
+        </li>
+
+        <li>
+          <router-link to="/profile">Perfil</router-link>
+        </li>
+      </ul>
     </div>
   </nav>
 </template>
@@ -68,4 +72,4 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style scoped></style>

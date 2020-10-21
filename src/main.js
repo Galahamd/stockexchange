@@ -4,6 +4,8 @@ import router from "./router";
 import store from "./store";
 import { firestorePlugin } from "vuefire";
 import Firebase from "@/firebaseConfig";
+import "materialize-css/dist/css/materialize.min.css";
+import "material-design-icons/iconfont/material-icons.css";
 require("firebase/auth");
 Vue.use(firestorePlugin);
 Vue.config.productionTip = false;

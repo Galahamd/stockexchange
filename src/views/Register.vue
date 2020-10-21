@@ -50,20 +50,16 @@
                 v-model="lastname"
               />
             </div>
+            <i class="material-icons prefix">supervisor_account</i>
             <div class="input-field">
-              <i class="material-icons prefix">supervisor_account</i>
-              <label for="cars">Choose a car:</label>
-              <select name="cars" id="cars">
-                <option value="volvo">Volvo</option>
-                <option value="saab">Saab</option>
-                <option value="opel">Opel</option>
-                <option value="audi">Audi</option>
+              <select v-model="broker">
+                <option value="" disabled selected>Elija un broker</option>
+                <option value="Mauricio">Mau</option>
+                <option value="Jocelyne">Jocelyne</option>
+                <option value="Patrick">Patrick</option>
+                <option value="Mariana">Mariana</option>
+                <option value="Frankie">Frankie</option>
               </select>
-              <option value="Mauricio">Mau</option>
-              <option value="Jocelyne">Jocelyne</option>
-              <option value="Patrick">Patrick</option>
-              <option value="Mariana">Mariana</option>
-              <option value="Frankie">Frankie</option>
             </div>
             <p v-if="errorMessage" class="red-text">*{{ errorMessage }}</p>
             <button class="btn  grey darken-1" v-on:click="register">
@@ -106,29 +102,44 @@ export default {
               currentUser.email
             );
             console.log(user);
-            db.collection("Investor")
-              .doc(this.userName)
-              .set({
-                broker: this.broker,
-                cash: 1000,
-                email: this.email,
-                lastname: this.lastname,
-                name: this.name,
-                netWorth: 0,
-                userName: this.userName
+            currentUser
+              .updateProfile({
+                displayName: this.userName
               })
-              .then(function() {
-                console.log("Document successfully written!");
-              })
-              .catch(function(error) {
-                console.error("Error writing document: ", error);
-              });
+              .then(
+                function() {
+                  // Profile updated successfully!
+                  console.log(currentUser.displayName);
+                },
+                function(error) {
+                  // An error happened.
+                  this.errorMessage = error;
+                }
+              );
             this.$router.go({ path: this.$router.path });
           },
           err => {
             this.errorMessage = err.message;
           }
         );
+      // Add a new document in collection "Investors"
+      db.collection("Investors")
+        .doc(this.email)
+        .set({
+          broker: this.broker,
+          cash: 1000,
+          email: this.email,
+          lastname: this.lastname,
+          name: this.name,
+          netWorth: 1000,
+          userName: this.userName
+        })
+        .then(function() {
+          console.log("Document successfully written!");
+        })
+        .catch(function(error) {
+          console.error("Error writing document: ", error);
+        });
       e.preventDefault();
     }
   }

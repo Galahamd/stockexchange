@@ -58,7 +58,7 @@ require("firebase/auth");
 require("firebase/firestore");
 const db = Firebase.firestore();
 export default {
-  name: "Precios",
+  name: "Profile",
   data: function() {
     return {
       name: "Test",
@@ -78,10 +78,11 @@ export default {
       .get()
       .then(function(doc) {
         if (doc.exists) {
-          console.log("Document data:", doc.data(), doc.data().name, this.name);
-          investor = doc.data();
-          console.log("Inversionista", investor);
-          
+          doc => {
+            console.log("Document data:", doc.data(), doc.data().name);
+            investor = doc.data();
+            console.log("Inversionista", investor);
+          };
         } else {
           // doc.data() will be undefined in this case
           console.log("No such document!");

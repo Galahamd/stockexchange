@@ -11,6 +11,7 @@
                 id="email"
                 placeholder="e-mail"
                 v-model="email"
+                class="white-text"
               />
             </div>
             <div class="input-field">
@@ -20,6 +21,7 @@
                 id="contraseña"
                 placeholder="Contraseña"
                 v-model="password"
+                class="white-text"
               />
             </div>
             <p v-if="errorMessage" class="red-text">*{{ errorMessage }}</p>

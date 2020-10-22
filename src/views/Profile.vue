@@ -61,7 +61,7 @@ export default {
   name: "Profile",
   data: function() {
     return {
-      name: "Test",
+      name: "",
       lastName: "",
       userName: "",
       email: "",
@@ -71,33 +71,22 @@ export default {
       investor: {}
     };
   },
-  created() {
-    var docRef = db.collection("Investor").doc("Joce");
+  mounted() {
+    if (Firebase.auth().currentUser) {
+      this.email = Firebase.auth().currentUser.email;
+    }
+    var docRef = db.collection("Investors").doc(this.email);
     let investor;
-    docRef
-      .get()
-      .then(function(doc) {
-        if (doc.exists) {
-          doc => {
-            console.log("Document data:", doc.data(), doc.data().name);
-            investor = doc.data();
-            console.log("Inversionista", investor);
-          };
-        } else {
-          // doc.data() will be undefined in this case
-          console.log("No such document!");
-        }
-      })
-      .catch(function(error) {
-        console.log("Error getting document:", error);
-      });
-    /*this.name = investor.name;
-    this.lastName = investor.lastName;
-    this.userName = investor.userName;
-    this.email = investor.email;
-    this.broker = investor.broker;
-    this.cash = investor.cash;
-    this.netWorth = investor.netWorth;*/
+    docRef.get().then(doc => {
+      investor = doc.data();
+      this.name = investor.name;
+      this.lastName = investor.lastName;
+      this.userName = investor.userName;
+      this.email = investor.email;
+      this.broker = investor.broker;
+      this.cash = investor.cash;
+      this.netWorth = investor.netWorth;
+    });
   }
 };
 </script>

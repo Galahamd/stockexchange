@@ -47,12 +47,12 @@
                 type="text"
                 id="lastname"
                 placeholder="Apellido"
-                v-model="lastname"
+                v-model="lastName"
               />
             </div>
-            <i class="material-icons prefix">supervisor_account</i>
+            <i class="material-icons prefix left">supervisor_account</i>
             <div class="input-field">
-              <select v-model="broker">
+              <select class="browser-default" v-model="broker">
                 <option value="" disabled selected>Elija un broker</option>
                 <option value="Mauricio">Mau</option>
                 <option value="Jocelyne">Jocelyne</option>
@@ -86,7 +86,7 @@ export default {
       password: "",
       userName: "",
       name: "",
-      lastname: "",
+      lastName: "",
       errorMessage: null
     };
   },
@@ -129,7 +129,7 @@ export default {
           broker: this.broker,
           cash: 1000,
           email: this.email,
-          lastname: this.lastname,
+          lastName: this.lastName,
           name: this.name,
           netWorth: 1000,
           userName: this.userName

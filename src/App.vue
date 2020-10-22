@@ -6,14 +6,14 @@
 </template>
 <script>
 import Navbar from "@/components/Navbar.vue";
-import M from "materialize-css";
+//import M from "materialize-css";
 export default {
   components: {
     Navbar
   },
-  mounted() {
+  /*mounted() {
     M.AutoInit();
-  }
+  }*/
 };
 </script>
 <style>

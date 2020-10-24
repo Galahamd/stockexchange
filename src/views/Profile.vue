@@ -7,45 +7,84 @@
           <div class="left-align">
             <p>
               <i class="material-icons prefix red-text">person</i>
-              Nombre: {{ name }}
+              Nombre: {{ investor.name }}
             </p>
           </div>
           <div class="left-align">
             <p>
               <i class="material-icons prefix red-text">person_outline</i>
-              Apellido: {{ lastName }}
+              Apellido: {{ investor.lastName }}
             </p>
           </div>
           <div class="left-align">
             <p>
               <i class="material-icons prefix red-text">email</i>
-              Correo electronico: {{ email }}
+              Correo electronico: {{ investor.email }}
             </p>
           </div>
           <div class="left-align">
             <p>
               <i class="material-icons prefix red-text">account_circle</i>
-              Nombre de Usuario: {{ userName }}
+              Nombre de Usuario: {{ investor.userName }}
             </p>
           </div>
           <div class="left-align">
             <p>
               <i class="material-icons prefix red-text">supervisor_account</i>
-              broker: {{ broker }}
+              broker: {{ investor.broker }}
             </p>
           </div>
           <div class="left-align">
             <p>
               <i class="material-icons prefix red-text">monetization_on</i>
-              Efectivo : {{ cash }}
+              Efectivo : {{ investor.cash }}
             </p>
           </div>
           <div class="left-align">
             <p>
               <i class="material-icons prefix red-text">attach_money</i>
-              Valor Neto : {{ netWorth }}
+              Valor Neto : {{ investor.netWorth }}
             </p>
           </div>
+          <div class="left-align"></div>
+        </div>
+        <div class="card black-text">
+          <h5>
+            <i class="material-icons prefix red-text">work</i>Portafolio de
+            Acciones
+          </h5>
+          <ul>
+            <li v-if="!(investor.sofiaStocks === 0)">
+              AVÍCOLA SOFÍA: {{ investor.sofiaStocks }}
+            </li>
+            <li v-if="!(investor.cbnStocks === 0)">
+              CERVECERÍA BOLIVIANA NACIONAL CBN: {{ investor.cbnStocks }}
+            </li>
+            <li v-if="!(investor.embolStocks === 0)">
+              EMBOL S.A. COCA COLA: {{ investor.embolStocks }}
+            </li>
+            <li v-if="!(investor.farmacorpStocks === 0)">
+              FARMACORP: {{ investor.farmacorpStocks }}
+            </li>
+            <li v-if="!(investor.pilStocks === 0)">
+              PIL ANDINA S.A.: {{ investor.pilStocks }}
+            </li>
+            <li v-if="!(investor.finoStocks === 0)">
+              FINO INDUSTRIAS DE ACEITE S.A.: {{ investor.finoStocks }}
+            </li>
+            <li v-if="!(investor.soboceStocks === 0)">
+              SOBOCE S.A.: {{ investor.soboceStocks }}
+            </li>
+            <li v-if="!(investor.monterreyStocks === 0)">
+              MONTERREY SRL: {{ investor.monterreyStocks }}
+            </li>
+            <li v-if="!(investor.imcruzStocks === 0)">
+              IMCRUZ: {{ investor.imcruzStocks }}
+            </li>
+            <li v-if="!(investor.polloscopacabanaStocks === 0)">
+              POLLOS COPACABANA: {{ investor.polloscopacabanaStocks }}
+            </li>
+          </ul>
         </div>
       </div>
     </div>
@@ -61,13 +100,7 @@ export default {
   name: "Profile",
   data: function() {
     return {
-      name: "",
-      lastName: "",
-      userName: "",
       email: "",
-      broker: "",
-      cash: 0,
-      netWorth: 0,
       investor: {}
     };
   },
@@ -76,16 +109,8 @@ export default {
       this.email = Firebase.auth().currentUser.email;
     }
     var docRef = db.collection("Investors").doc(this.email);
-    let investor;
     docRef.get().then(doc => {
-      investor = doc.data();
-      this.name = investor.name;
-      this.lastName = investor.lastName;
-      this.userName = investor.userName;
-      this.email = investor.email;
-      this.broker = investor.broker;
-      this.cash = investor.cash;
-      this.netWorth = investor.netWorth;
+      this.investor = doc.data();
     });
   }
 };

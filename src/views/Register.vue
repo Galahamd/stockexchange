@@ -132,7 +132,17 @@ export default {
           lastName: this.lastName,
           name: this.name,
           netWorth: 1000,
-          userName: this.userName
+          userName: this.userName,
+          sofiaStocks: 0,
+          cbnStocks: 0,
+          embolStocks: 0,
+          farmacorpStocks: 0,
+          pilStocks: 0,
+          finoStocks: 0,
+          soboceStocks: 0,
+          monterreyStocks: 0,
+          imcruzStocks: 0,
+          polloscopacabanaStocks: 0
         })
         .then(function() {
           console.log("Document successfully written!");
